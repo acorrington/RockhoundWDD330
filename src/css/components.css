@@ -1,0 +1,495 @@
+.river-card {
+    border-left: 5px solid var(--primary-color);
+    padding: 1rem;
+    background: #f9f9f9;
+}
+
+.badge-green,
+.badge-yellow,
+.badge-red,
+.badge-neutral {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.badge-green {
+    background: var(--color-moss);
+    color: white;
+}
+
+.badge-yellow {
+    background: var(--color-caution);
+    color: white;
+}
+
+.badge-red {
+    background: var(--color-danger);
+    color: white;
+}
+
+.badge-neutral {
+    background: var(--color-sand);
+    color: var(--color-soil);
+}
+
+#status-dot.badge-green {
+    background: var(--color-moss);
+}
+
+#status-dot.badge-yellow {
+    background: var(--color-caution);
+}
+
+#status-dot.badge-red {
+    background: var(--color-danger);
+}
+
+#status-dot.badge-neutral {
+    background: var(--color-sand);
+}
+
+.river-card__title {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.river-card__stats p {
+    margin: 0.25rem 0;
+}
+
+.geo-info h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.logbook__controls {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.logbook__controls input {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.scouting__controls {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.scouting__controls input {
+    flex: 1 1 220px;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.scouting__controls button:disabled {
+    opacity: 0.65;
+    cursor: wait;
+}
+
+.logbook__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.log-card {
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+    border-radius: 6px;
+    position: relative;
+    background-color: white;
+    cursor: pointer;
+    animation: fadeInUp 0.4s ease-out forwards;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.log-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+.log-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.log-card__actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.log-card__edit,
+.log-card__delete {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s, transform 0.1s;
+}
+
+.log-card__edit {
+    color: var(--color-moss);
+}
+
+.log-card__delete {
+    color: var(--error-color);
+    font-size: 1.5rem;
+}
+
+.log-card__edit:hover,
+.log-card__delete:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.log-card__notes {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.log-card.highlighted {
+    border-color: var(--color-moss);
+    box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.4);
+    transform: scale(1.02);
+}
+
+.log-card__footer {
+    border-top: 1px solid var(--border-color);
+    padding-top: 0.5rem;
+    font-style: italic;
+}
+
+dialog {
+    padding: 2rem;
+    border: none;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 560px;
+    margin: auto;
+    animation: slideDown 0.3s ease-out;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: white;
+    color: var(--text-main);
+}
+
+.form-row {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.form-row .form-group {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+}
+
+.map-container {
+    width: 100%;
+}
+
+.map-container img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+#map-pins {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: auto;
+    z-index: 10;
+}
+
+.map-pin {
+    --pin-color: var(--color-moss);
+    width: 14px;
+    height: 14px;
+    background-color: var(--pin-color);
+    border: 2px solid white;
+    border-radius: 50%;
+    pointer-events: auto;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s, background-color 0.2s;
+    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) backwards;
+    transform-origin: center;
+    display: block;
+}
+
+.map-pin.status-green {
+    --pin-color: var(--color-moss);
+}
+
+.map-pin.status-yellow {
+    --pin-color: var(--color-caution);
+}
+
+.map-pin.status-red {
+    --pin-color: var(--color-danger);
+}
+
+.map-pin.status-neutral {
+    --pin-color: var(--color-stone);
+}
+
+.map-pin:hover {
+    transform: scale(1.3);
+}
+
+.map-pin.active {
+    border-color: #ffffff;
+    transform: scale(1.6);
+    z-index: 20;
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--pin-color) 35%, transparent), 0 4px 8px rgba(0, 0, 0, 0.55);
+    animation: activePulse 1.6s infinite ease-in-out;
+}
+
+.map-pin.log-pin {
+    background-color: var(--color-stone);
+    border-radius: 4px;
+    /* Square shape for logs */
+    width: 12px;
+    height: 12px;
+    transform: rotate(45deg);
+    /* Diamond shape */
+}
+
+.map-pin.log-pin:hover {
+    transform: rotate(45deg) scale(1.4);
+}
+
+.map-pin.log-pin.highlighted {
+    background-color: var(--color-caution);
+    border-color: white;
+    z-index: 30;
+    animation: logPinPulse 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes logPinPulse {
+    from {
+        transform: rotate(45deg) scale(1.6);
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-caution) 50%, transparent);
+    }
+    to {
+        transform: rotate(45deg) scale(2.2);
+        box-shadow: 0 0 0 10px color-mix(in srgb, var(--color-caution) 0%, transparent);
+    }
+}
+
+.map-pin.user {
+    --user-pin-color: #2563eb;
+    background-color: var(--user-pin-color);
+    border-color: #ffffff;
+    width: 16px;
+    height: 16px;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.4);
+    animation: pulse 2.2s infinite;
+}
+
+/* Animations */
+@keyframes pulse {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 color-mix(in srgb, var(--user-pin-color, #2563eb) 40%, transparent);
+    }
+
+    70% {
+        transform: scale(1.1);
+        box-shadow: 0 0 0 8px color-mix(in srgb, var(--user-pin-color, #2563eb) 0%, transparent);
+    }
+
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 color-mix(in srgb, var(--user-pin-color, #2563eb) 0%, transparent);
+    }
+}
+
+@keyframes activePulse {
+
+    0%,
+    100% {
+        transform: scale(1.55);
+        box-shadow: 0 0 0 4px color-mix(in srgb, var(--pin-color) 35%, transparent), 0 4px 8px rgba(0, 0, 0, 0.45);
+    }
+
+    50% {
+        transform: scale(1.8);
+        box-shadow: 0 0 0 10px color-mix(in srgb, var(--pin-color) 15%, transparent), 0 6px 14px rgba(0, 0, 0, 0.45);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes skeleton {
+    0% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.6;
+    }
+}
+
+.skeleton {
+    animation: skeleton 1.5s infinite;
+    background-color: var(--color-cream);
+    pointer-events: none;
+}
+
+.skeleton>* {
+    opacity: 0.3;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Mindat Minerals Section */
+.mindat-minerals-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.mineral-item {
+    border-left: 4px solid var(--color-stone);
+    padding: 0.5rem 0.75rem;
+    background-color: #fcfcfc;
+    border-radius: 0 4px 4px 0;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.mineral-item:last-child {
+    border-bottom: none;
+}
+
+.mineral-item:hover {
+    transform: translateX(4px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.mineral-item__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.mineral-item__name {
+    font-weight: bold;
+    font-size: 1.05rem;
+    color: var(--color-soil);
+}
+
+.mineral-item__formula {
+    font-family: monospace;
+    font-size: 0.85rem;
+    background-color: #e2e8f0;
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    color: #1a202c;
+}
+
+.mineral-item__details {
+    margin-top: 0.25rem;
+    font-size: 0.9rem;
+    color: var(--color-slate);
+}
+
+.mineral-item__meta {
+    margin-top: 0.25rem;
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
