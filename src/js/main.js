@@ -18,6 +18,7 @@ import { getSavedLogs, saveLog, updateLog } from "./utils/storage.js";
 import { STATES } from "./utils/locations.js";
 import { calculateDistanceBetweenTwoCoordinatesInMiles, findNearestWaterStationWithinMaximumMilesRange } from "./utils/geography.js";
 import { fetchCountyByCoordinates } from "./api/fcc.js";
+import sampleLogs from "../data/sampleLogs.json";
 
 // Module-level variables that track the current app state
 // These need to be accessible across multiple functions, so they live up here
@@ -818,13 +819,7 @@ document.addEventListener("DOMContentLoaded", async function() {
             }
 
             try {
-                const response = await fetch("/src/data/sampleLogs.json");
-                if (!response.ok) {
-                    throw new Error(`Could not load sampleLogs.json (status: ${response.status})`);
-                }
-
-                const sampleLogs = await response.json();
-                console.log(`[Main] Loaded ${sampleLogs.length} sample log(s) from JSON file`);
+                console.log(`[Main] Loaded ${sampleLogs.length} sample log(s) statically`);
 
                 const existingIds = existingLogs.map(function(log) { return log.id; });
                 let addedCount = 0;
