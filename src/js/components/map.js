@@ -84,14 +84,21 @@ function renderMap(stations, userPos, activeId, logs = [], isUSMap = false, fitL
     if (!mapInstance) {
         console.log("[Map] Initializing Mapbox map for the first time...");
 
+        const mapboxgl = window.mapboxgl;
+
+        if (!mapboxgl) {
+            console.error("Mapbox GL JS failed to load from CDN.");
+            return;
+        }
+
         mapboxgl.accessToken = MAPBOX_TOKEN;
         mapInstance = new mapboxgl.Map({
             container: "map-container-inner",
-            style: "mapbox://styles/mapbox/satellite-streets-v12", // Satellite view is great for scouting rock sites
-            center: [-98.5795, 39.8283], // Approximate center of the continental US
+            style: "mapbox://styles/mapbox/satellite-streets-v12",
+            center: [-98.5795, 39.8283],
             zoom: 3,
             projection: "globe",
-            doubleClickZoom: false // Disable so we can use double-click for something else later if needed
+            doubleClickZoom: false
         });
 
         // Add the built-in zoom controls (+/- buttons)
