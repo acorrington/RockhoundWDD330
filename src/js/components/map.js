@@ -10,7 +10,7 @@ import { getRiverCondition } from "./riverCard.js";
 
 // Read the Mapbox API token from the environment variables set in .env
 const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN;
-console.log("MAPBOX_TOKEN: " + MAPBOX_TOKEN);
+console.log("VITE_MINDAT_API_KEY: " + VITE_MINDAT_API_KEY);
 
 // Keep a reference to the map so we don't create more than one
 let mapInstance = null;
