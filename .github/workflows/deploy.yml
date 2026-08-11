@@ -3,6 +3,7 @@ name: Deploy Vite Site to GitHub Pages
 on:
   push:
     branches: ["main"] # Change to "master" if your primary branch is named master
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -16,6 +17,7 @@ concurrency:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -24,10 +26,19 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Validate required environment variables
+        env:
+          VITE_MAPBOX_TOKEN: ${{ secrets.VITE_MAPBOX_TOKEN || vars.VITE_MAPBOX_TOKEN }}
+          VITE_MINDAT_API_KEY: ${{ secrets.VITE_MINDAT_API_KEY || vars.VITE_MINDAT_API_KEY }}
+        run: |
+          [ -n "$VITE_MAPBOX_TOKEN" ] || (echo "❌ Missing VITE_MAPBOX_TOKEN" && exit 1)
+          [ -n "$VITE_MINDAT_API_KEY" ] || (echo "❌ Missing VITE_MINDAT_API_KEY" && exit 1)
+          echo "✅ Required env vars are present"
 
       - name: Build project with environment variables
         env:
@@ -38,7 +49,7 @@ jobs:
       - name: Upload artifact for GitHub Pages
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          path: "./dist"
 
       - name: Deploy to GitHub Pages
         id: deployment
