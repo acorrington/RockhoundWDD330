@@ -14,7 +14,7 @@
 
 // Pull in the API key from environment variables (set in the .env file)
 const MINDAT_API_KEY = import.meta.env.VITE_MINDAT_API_KEY;
-alert("Mindat API Key: " + MINDAT_API_KEY);
+console.log("Mindat API Key: " + MINDAT_API_KEY);
 
 /**
  * Finds minerals that have been recorded near a given latitude and longitude.
