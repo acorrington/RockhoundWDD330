@@ -439,7 +439,12 @@ document.addEventListener("DOMContentLoaded", async function() {
     console.log("[Main] Page loaded - starting app initialization...");
 
     // On first load show all saved logs in the grid and as pins on the US map
-    const initialLogs = getSavedLogs();
+    let initialLogs = getSavedLogs();
+    if (initialLogs.length === 0) {
+        console.log("[Main] No saved logs found. Automatically loading sample logs...");
+        localStorage.setItem("rockhound_logs", JSON.stringify(sampleLogs));
+        initialLogs = getSavedLogs();
+    }
     renderLogGrid(initialLogs);
     showUSMap(initialLogs);
 
@@ -799,50 +804,7 @@ document.addEventListener("DOMContentLoaded", async function() {
     const openDialogBtn = document.getElementById("open-log-dialog");
     const closeDialogBtn = document.getElementById("close-log-dialog");
     const logForm = document.getElementById("log-form");
-    const loadSampleLogsBtn = document.getElementById("load-sample-logs-btn");
 
-    // "Load Sample Logs" button - imports 25 pre-made logs from sampleLogs.json into localStorage
-    if (loadSampleLogsBtn) {
-        loadSampleLogsBtn.addEventListener("click", async function() {
-            console.log("[Main] Load Sample Logs clicked");
-
-            const existingLogs = getSavedLogs();
-
-            if (existingLogs.length > 0) {
-                const userConfirmed = confirm(
-                    `You already have ${existingLogs.length} log(s) saved. Loading sample logs will add them alongside your existing ones. Continue?`
-                );
-                if (!userConfirmed) {
-                    console.log("[Main] User cancelled sample log load");
-                    return;
-                }
-            }
-
-            try {
-                console.log(`[Main] Loaded ${sampleLogs.length} sample log(s) statically`);
-
-                const existingIds = existingLogs.map(function(log) { return log.id; });
-                let addedCount = 0;
-
-                sampleLogs.forEach(function(sampleLog) {
-                    if (!existingIds.includes(sampleLog.id)) {
-                        saveLog(sampleLog);
-                        addedCount++;
-                    } else {
-                        console.log(`[Main] Skipping duplicate sample log ID: ${sampleLog.id}`);
-                    }
-                });
-
-                console.log(`[Main] Added ${addedCount} sample log(s) to localStorage`);
-                alert(`Loaded ${addedCount} sample field logs!`);
-                window.dispatchEvent(new Event("logsChanged"));
-
-            } catch (loadError) {
-                console.error("[Main] Error loading sample logs:", loadError);
-                alert("Sorry, could not load the sample logs. Check the console for details.");
-            }
-        });
-    }
     // Set up the add/edit log dialog
     if (logDialog && openDialogBtn && closeDialogBtn && logForm) {
 
